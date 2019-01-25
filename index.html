@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Kevin's Lunar</title>
+  <link rel="icon" href="school-calendar.png">
+  <script src="jquery-3.3.1.min.js"></script>
+  <script src="script/date.js"></script>
+  <script src="script/bootstrap-datepicker.min.js"></script>
+
+  <script src="script.js"></script>
+  <script src="kpopup/kpopup.js"></script>
+  <script src="kpopup/popup-ajax.js"></script>
+  <script src="amlich-hnd.js"></script>
+
+  <link rel="stylesheet" type='text/css' href="style.css">
+  <link rel="stylesheet" type='text/css' href="kpopup/kpopup.css">
+  <link rel="stylesheet" type='text/css' href="kalendar.css">
+  <link rel="stylesheet" type='text/css' href="css/bootstrap-datepicker.css" />
+
+</head>
+<body>
+
+  <div class="kalendar">
+    <table>
+      <thead class="kal-header">
+        <tr class="header">
+          <th colspan="1" class="nextPrev" onclick="load_prev_year();">❰❰</th>
+          <th colspan="2" class="nextPrev" onclick="load_prev_month();">❮</th>
+          <th class="title" id="titleCal">07/2017</th>
+          <th colspan="2" class="nextPrev" onclick="load_next_month();">❯</th>
+          <th colspan="1" class="nextPrev" onclick="load_next_year();">❱❱</th>
+        </tr>
+        <tr class="kal-dayWeek">
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="config">
+    <input type="checkbox" id="chk-show-lunar-day" checked='checked' onchange="toggle_show_lunar_day(this);" /><label for="chk-show-lunar-day">Show lunar day</label>
+  </div>
+
+  <div>Created date: 2019-01-25 15:37</div>
+
+  <div class="hidden">
+    <div id="day_temp">
+      <div class="ka-row">
+        <div class="ka-back">
+          <table>
+            <tbody>
+              <tr>
+                <td class="ka-day" data-date="1499999900000"></td>
+                <td class="ka-day" data-date="1499999900000"></td>
+                <td class="ka-day" data-date="1499999900000"></td>
+                <td class="ka-day" data-date="1499999900000"></td>
+                <td class="ka-day" data-date="1499999900000"></td>
+                <td class="ka-day" data-date="1499999900000"></td>
+                <td class="ka-day" data-date="1499999900000"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ka-week">
+          <table>
+            <tbody>
+              <tr>
+                <th class="kal-day" data-date="1499999900000" onclick="select_date(this);">
+                  <div class="dayNumber">26</div>
+                  <div class="lunardayNumber">26</div>
+                </th>
+                <th class="kal-day" data-date="1499999900000" onclick="select_date(this);">
+                  <div class="dayNumber">27</div>
+                  <div class="lunardayNumber">26</div>
+                </th>
+                <th class="kal-day" data-date="1499999900000" onclick="select_date(this);">
+                  <div class="dayNumber">28</div>
+                  <div class="lunardayNumber">26</div>
+                </th>
+                <th class="kal-day" data-date="1499999900000" onclick="select_date(this);">
+                  <div class="dayNumber">29</div>
+                  <div class="lunardayNumber">26</div>
+                </th>
+                <th class="kal-day" data-date="1499999900000" onclick="select_date(this);">
+                  <div class="dayNumber">30</div>
+                  <div class="lunardayNumber">26</div>
+                </th>
+                <th class="kal-day" data-date="1499999900000" onclick="select_date(this);">
+                  <div class="dayNumber">1</div>
+                  <div class="lunardayNumber">26</div>
+                </th>
+                <th class="kal-day" data-date="1499999900000" onclick="select_date(this);">
+                  <div class="dayNumber">2</div>
+                  <div class="lunardayNumber">26</div>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
