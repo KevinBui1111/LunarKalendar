@@ -1,13 +1,13 @@
 "use strict";
 
-var cur_date, today, first_day;
+var cur_date, today;
 let task;
 const TIME_WEEK = 1000 * 60 * 60 * 24 * 7
   , TIME_DAY = 1000 * 60 * 60 * 24
   , TIME_HOUR = 1000 * 60 * 60
   , FORMAT_DATE = 'dd/MM/yyyy'
   ;
-let 
+let
   DAY_OFF = []
   ;
 
@@ -16,17 +16,8 @@ $(document).ready(function () {
   cur_date.setHours(0, 0, 0, 0);
   today = new Date(cur_date)
   load_curr_month(cur_date);
+  show_day_info(+today);
 });
-
-String.prototype.format = function () {
-  let s = this;
-  for (let i = 0; i < arguments.length; i++) {
-    let reg = new RegExp("\\(p" + i + "\\)", "g");
-    s = s.replace(reg, arguments[i]);
-  }
-
-  return s;
-}
 
 function load_curr_month(date) {
   let day = new Date(date);
@@ -38,12 +29,8 @@ function load_curr_month(date) {
     (get_day_week_nth(day) == 1 ? 7 : get_day_week_nth(day) - 1)
   );
 
-  first_day = new Date(day);
-
-  let dom = '';
   $('.kalendar .ka-row').remove();
   for (let i = 0; i < 6; ++i) {
-    //dom += '<div class="row kal-week">';
     for (let d = 0; d < 7; ++d) {
       // check the day is weekend
       if (day.getDay() == 6 || day.getDay() == 0) {// sat or sun
@@ -75,43 +62,45 @@ function load_curr_month(date) {
       day.setDate(day.getDate() + 1);
     }
     $('.kalendar').append($('#day_temp').children().clone());
-    //dom += '</div>';
   }
 
   $('.kal-body .kal-week').remove();
-  $('.kal-body').append(dom);
   $('#titleCal').html(cur_date.format('MM/yyyy'));
 }
-function load_prev_month() {
-  cur_date.setMonth(cur_date.getMonth() - 1);
-  load_curr_month(cur_date);
-}
-function load_next_month() {
-  cur_date.setMonth(cur_date.getMonth() + 1);
-  load_curr_month(cur_date);
-}
-function load_prev_year() {
-  cur_date.setMonth(cur_date.getMonth() - 12);
-  load_curr_month(cur_date);
-}
-function load_next_year() {
-  cur_date.setMonth(cur_date.getMonth() + 12);
+function load_next_month(n) {
+  cur_date.setMonth(cur_date.getMonth() + n);
   load_curr_month(cur_date);
 }
 //---------------------
-function get_week_start(date) {
-  date = new Date(date);
-  return +date -
-    (get_day_week_nth(date) - 1) * TIME_DAY;
-}
-
 function get_day_week_nth(date) {
   return date.getDay() == 0 ? 7 : date.getDay();
 
 }
-function toggle_show_lunar_day(e) {
-  if (e.checked)
-    [...document.getElementsByClassName('lunardayNumber')].forEach(d => d.classList.remove('hidden'));
-  else
-    [...document.getElementsByClassName('lunardayNumber')].forEach(d => d.classList.add('hidden'));
+function show_day_info(d) {
+  let day = new Date(d)
+    , [dd, mm, yy] = [day.getDate(), day.getMonth() + 1, day.getFullYear()]
+    , lunar = getLunarDate(dd, mm, yy)
+    , nhuan = lunar.leap == 1 ? ' (nhuận)' : ''
+    , canchi = getCanChi(lunar)
+    , giodaungay = getCanHour0(lunar.jd) + " " + CHI[0]
+    , tiet = TIETKHI[getSunLongitude(lunar.jd + 1, 7)]
+    , giohoangdao = getGioHoangDao(lunar.jd)
+
+    , dom = document.getElementById('day-info-temp').innerHTML.format(
+      `${dd} / ${('00' + mm).slice(-2)} / ${yy}`
+      , `${lunar.day} / ${('00' + lunar.month).slice(-2)}${nhuan} / ${lunar.year}`
+      , canchi[0], canchi[1] + nhuan, canchi[2]
+      , giodaungay, tiet, giohoangdao
+    );
+  document.getElementById('day-info').innerHTML = dom;
+}
+//---------------------
+String.prototype.format = function () {
+  let s = this;
+  for (let i = 0; i < arguments.length; ++i) {
+    let reg = new RegExp("\\(p" + i + "\\)", "g");
+    s = s.replace(reg, arguments[i]);
+  }
+
+  return s;
 }

@@ -25,11 +25,11 @@
     <table>
       <thead class="kal-header">
         <tr class="header">
-          <th colspan="1" class="nextPrev" onclick="load_prev_year();">❰❰</th>
-          <th colspan="2" class="nextPrev" onclick="load_prev_month();">❮</th>
+          <th colspan="1" class="nextPrev" onclick="load_next_month(-12);">❰❰</th>
+          <th colspan="2" class="nextPrev" onclick="load_next_month(-1);">❮</th>
           <th class="title" id="titleCal">07/2017</th>
-          <th colspan="2" class="nextPrev" onclick="load_next_month();">❯</th>
-          <th colspan="1" class="nextPrev" onclick="load_next_year();">❱❱</th>
+          <th colspan="2" class="nextPrev" onclick="load_next_month(1);">❯</th>
+          <th colspan="1" class="nextPrev" onclick="load_next_month(12);">❱❱</th>
         </tr>
         <tr class="kal-dayWeek">
           <th>Mon</th>
@@ -44,11 +44,16 @@
     </table>
   </div>
 
-  <div class="config">
-    <input type="checkbox" id="chk-show-lunar-day" checked='checked' onchange="toggle_show_lunar_day(this);" /><label for="chk-show-lunar-day">Show lunar day</label>
+  <div id="day-info">
+    <div class='solar-day'>30 / 12 / 2019</div>
+    <div class='lunar-day'>30 / 12 / 2019</div>
+    <div>Ngày <strong>Kỷ Mùi</strong>, tháng <strong>Ất Sửu</strong>, năm <strong>Mậu Tuất</strong></div>
+    <div>Tiết: <strong>Đại hàn</strong></div>
+    <div>Giờ đầu ngày: <strong>Nhâm Tý</strong></div>
+    <div>Giờ hoàng đạo: Dần (3-5), Mão (5-7), Tỵ (9-11), Thân (15-17), Tuất (19-21), Hợi (21-23)</div>
   </div>
 
-  <div>Created date: 2019-01-25 15:37</div>
+  <pre>Created date: 2019-01-25 15:37</pre>
 
   <div class="hidden">
     <div id="day_temp">
@@ -105,6 +110,14 @@
           </table>
         </div>
       </div>
+    </div>
+    <div id="day-info-temp">
+      <div class='solar-day'>(p0)</div>
+      <div class='lunar-day'>(p1)</div>
+      <div>Ngày <strong>(p2)</strong>, tháng <strong>(p3)</strong>, năm <strong>(p4)</strong></div>
+      <div>Giờ đầu ngày: <strong>(p5)</strong></div>
+      <div>Tiết: <strong>(p6)</strong></div>
+      <div>Giờ hoàng đạo: (p7)</div>
     </div>
   </div>
 </body>

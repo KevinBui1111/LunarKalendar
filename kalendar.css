@@ -1,98 +1,113 @@
 ﻿.kalendar {
-    margin: .5em;
-    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+  margin: .5em;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
 }
+
 .kalendar table {
-    width: 100%;
-    height: 100%;
-    table-layout: fixed;
+  width: 100%;
+  height: 100%;
+  table-layout: fixed;
 }
+
 .kal-header {
-    background-color: #25A0DA;
-    border: solid 1px #e0e0e0;
-    font-size: 1.6em;
+  background-color: #25A0DA;
+  border: solid 1px #e0e0e0;
+  font-size: 1.6em;
 }
-.kal-header .header{
-	color:White;
+
+.kal-header .header {
+  color: White;
 }
+
 /* header -========================*/
-.nextPrev:hover
-{
-	background-color:#5ab6e2;
+
+.nextPrev:hover {
+  background-color: #5ab6e2;
 }
-.title
-{
-	font-weight:bold;
-	white-space:nowrap;
-	padding: .2em;
-    text-align: center;
+
+.title {
+  font-weight: bold;
+  white-space: nowrap;
+  padding: .2em;
+  text-align: center;
 }
 
 /* Body -========================*/
-.kal-dayWeek
-{
-	background-color:#e0e0e0;
+
+.kal-dayWeek {
+  background-color: #e0e0e0;
 }
-.kal-dayWeek div
-{
-    vertical-align:middle;
+
+.kal-dayWeek div {
+  vertical-align: middle;
 }
 
 /* Day -========================*/
+
 .ka-day {
-    background-color: AliceBlue;
-    border: solid 1px #E0f0f0;
+  background-color: AliceBlue;
+  border: solid 1px #E0f0f0;
 }
+
 .ka-day:hover {
-    background-color: lightskyblue;
+  background-color: lightskyblue;
 }
-.otherMonth
-{
-	opacity: 0.5;
+
+.otherMonth {
+  opacity: 0.5;
 }
+
 .ka-today {
-    background-color: lightgreen;
-    color: White;
+  background-color: lightgreen;
+  color: White;
 }
 
 /* Inside day -========================*/
+
 .ka-row {
-    min-height: 5em;
+  min-height: 5em;
 }
+
 .ka-back {
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
 }
+
 .ka-week {
-    pointer-events:none;
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
+  pointer-events: none;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
 }
+
 .ka-week td {
   vertical-align: bottom;
 }
+
 .ka-event {
-    font-size: .7em;
-    color: white;
-    padding: 0.1em;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  font-size: .7em;
+  color: white;
+  padding: 0.1em;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
 .ka-week th {
-    text-align:initial;
+  text-align: initial;
 }
-.kal-day {
-}
+
+.kal-day {}
+
 .dayNumber {
   font-size: 1.6em;
   position: absolute;
   top: 0;
   left: .2em;
 }
+
 .lunardayNumber {
   /* font-size: 1em; */
-  color: darkgoldenrod;
+  color: dodgerblue;
   position: absolute;
   bottom: 0;
   right: .3em;
