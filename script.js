@@ -1,26 +1,30 @@
 "use strict";
 
-var cur_date, today;
-let task;
-const TIME_WEEK = 1000 * 60 * 60 * 24 * 7
-  , TIME_DAY = 1000 * 60 * 60 * 24
-  , TIME_HOUR = 1000 * 60 * 60
-  , FORMAT_DATE = 'dd/MM/yyyy'
-  ;
-let
-  DAY_OFF = []
+let cur_date
+  , DAY_OFF = []
   ;
 
 $(document).ready(function () {
   cur_date = new Date;
   cur_date.setHours(0, 0, 0, 0);
-  today = new Date(cur_date)
   load_curr_month(cur_date);
-  show_day_info(+today);
+  show_day_info(cur_date);
+
+  $(".kalendar").on('click', '.ka-day', function () {
+    $('.ka-day.selected').removeClass('selected');
+    this.classList.add('selected');
+    show_day_info(this.date);
+  });
+
+  var hammertime = new Hammer(document, { inputClass: Hammer.TouchInput });
+  hammertime.on('swipeleft', () => load_next_month(1));
+  hammertime.on('swiperight', () => load_next_month(-1));
 });
 
 function load_curr_month(date) {
-  let day = new Date(date);
+  let day = new Date(date)
+    , today = new Date;
+  today.setHours(0, 0, 0, 0); // remove time
   day.setHours(0, 0, 0, 0); // remove time
   day.setDate(1); // set first date of month
 
@@ -31,28 +35,33 @@ function load_curr_month(date) {
 
   $('.kalendar .ka-row').remove();
   for (let i = 0; i < 6; ++i) {
+    let row_dom = $('#day_temp').children().clone();
     for (let d = 0; d < 7; ++d) {
       // check the day is weekend
       if (day.getDay() == 6 || day.getDay() == 0) {// sat or sun
         DAY_OFF.push(+day);
       }
 
-      let td = $('#day_temp .ka-week th:eq(' + d + '),#day_temp .ka-back td:eq(' + d + ')');
+      let td = row_dom.find('.ka-week th:eq(' + d + '), .ka-back td:eq(' + d + ')');
 
       if (day.getMonth() == cur_month)
-        td.removeClass('otherMonth');
+        td.eq(1).removeClass('otherMonth');
       else
-        td.addClass('otherMonth');
+        td.eq(1).addClass('otherMonth');
 
       if (+day == +today)
         td.eq(0).addClass('ka-today');
       else
         td.eq(0).removeClass('ka-today');
 
-      td.data('date', +day);
+      if (is_holiday(day))
+        td.eq(0).addClass('holiday');
+      else
+        td.eq(0).removeClass('holiday');
+
+      td[0].date = new Date(day);
       td.find('.dayNumber').html(day.getDate());
 
-      td = $('#day_temp .ka-week th:eq(' + d + '),#day_temp .ka-back td:eq(' + d + ')');
       let lunarDate = getLunarDate(day.getDate(), day.getMonth() + 1, day.getFullYear());
       let lunar = lunarDate.day
       if (day.getDate() == 1 || lunarDate.day == 1 || i + d == 0)
@@ -61,7 +70,7 @@ function load_curr_month(date) {
 
       day.setDate(day.getDate() + 1);
     }
-    $('.kalendar').append($('#day_temp').children().clone());
+    $('.kalendar').append(row_dom);
   }
 
   $('.kal-body .kal-week').remove();
@@ -85,14 +94,25 @@ function show_day_info(d) {
     , giodaungay = getCanHour0(lunar.jd) + " " + CHI[0]
     , tiet = TIETKHI[getSunLongitude(lunar.jd + 1, 7)]
     , giohoangdao = getGioHoangDao(lunar.jd)
+    , holiday = is_holiday(d)
 
     , dom = document.getElementById('day-info-temp').innerHTML.format(
-      `${dd} / ${('00' + mm).slice(-2)} / ${yy}`
-      , `${lunar.day} / ${('00' + lunar.month).slice(-2)}${nhuan} / ${lunar.year}`
-      , canchi[0], canchi[1] + nhuan, canchi[2]
+      `${day.format('dd / MM / yyyy')}`
+      , `${lunar.day.pad(2)} / ${lunar.month.pad(2)}${nhuan} / ${lunar.year}`
+      , canchi[0], canchi[1], canchi[2]
       , giodaungay, tiet, giohoangdao
+      , holiday ? holiday.info : ''
     );
   document.getElementById('day-info').innerHTML = dom;
+}
+function is_holiday(d) {
+  let [dd, mm, yy] = [d.getDate(), d.getMonth() + 1, d.getFullYear()]
+    , lunar = getLunarDate(dd, mm, yy)
+    ;
+  return EVENTS.find(e =>
+    (e.lunar == 1 && e.dd == lunar.day && e.mm == lunar.month) ||
+    (e.lunar == 0 && e.dd == dd && e.mm == mm)
+  );
 }
 //---------------------
 String.prototype.format = function () {
@@ -103,4 +123,9 @@ String.prototype.format = function () {
   }
 
   return s;
+}
+Number.prototype.pad = function (width, z) {
+  z = z || '0';
+  let n = this + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }

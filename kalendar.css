@@ -1,5 +1,21 @@
-﻿.kalendar {
-  margin: .5em;
+﻿.header {
+  display: flex;
+  background-color: #25A0DA;
+  color: White;
+  font-size: 1.5em;
+  z-index: 1;
+  align-items: baseline;
+}
+
+.header>div {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  padding: .2em;
+}
+
+.kalendar {
+  /* margin: .5em; */
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
 }
 
@@ -9,27 +25,10 @@
   table-layout: fixed;
 }
 
-.kal-header {
-  background-color: #25A0DA;
-  border: solid 1px #e0e0e0;
-  font-size: 1.6em;
-}
-
-.kal-header .header {
-  color: White;
-}
-
 /* header -========================*/
 
 .nextPrev:hover {
   background-color: #5ab6e2;
-}
-
-.title {
-  font-weight: bold;
-  white-space: nowrap;
-  padding: .2em;
-  text-align: center;
 }
 
 /* Body -========================*/
@@ -45,16 +44,16 @@
 /* Day -========================*/
 
 .ka-day {
-  background-color: AliceBlue;
-  border: solid 1px #E0f0f0;
+  border: solid 1px #E0F0F0;
 }
 
-.ka-day:hover {
+.ka-day:hover, .ka-day.selected {
   background-color: lightskyblue;
 }
 
 .otherMonth {
   opacity: 0.5;
+  background-color: #E0E0E0;
 }
 
 .ka-today {
@@ -65,7 +64,7 @@
 /* Inside day -========================*/
 
 .ka-row {
-  min-height: 5em;
+  min-height: 3em;
 }
 
 .ka-back {
@@ -96,19 +95,25 @@
   text-align: initial;
 }
 
-.kal-day {}
-
 .dayNumber {
-  font-size: 1.6em;
+  font-size: 1.4em;
   position: absolute;
   top: 0;
   left: .2em;
 }
 
 .lunardayNumber {
-  /* font-size: 1em; */
   color: dodgerblue;
   position: absolute;
   bottom: 0;
   right: .3em;
+}
+.holiday {
+  color: red;
+  vertical-align: top;
+  text-align: center;
+  font-weight: bold;
+}
+.holiday::after {
+  content: '\00a0\00a0\00a0\00a0✽';
 }
