@@ -64,7 +64,7 @@
 /* Inside day -========================*/
 
 .ka-row {
-  min-height: 3em;
+  min-height: 4em;
 }
 
 .ka-back {
@@ -116,4 +116,20 @@
 }
 .holiday::after {
   content: '\00a0\00a0\00a0\00a0✽';
+}
+
+@media screen and (min-width: 480px) and (min-height: 480px) {
+  .ka-row {
+    min-height: 5em;
+  }
+  .holiday {
+    font-weight: inherit;
+  }
+}
+
+/* #### Mobile Phones Landscape #### */
+@media screen and (max-height: 480px) and (orientation: landscape){
+  .ka-row {
+    min-height: 3em;
+  }
 }
