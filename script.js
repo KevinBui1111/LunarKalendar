@@ -5,6 +5,17 @@ let cur_date
   ;
 
 $(document).ready(function () {
+  // add anniversary
+  EVENTS.push.apply(EVENTS, [
+    { lunar: 1, dd:  7, mm:  1, info: "Giỗ ông nội (1988)" }
+  , { lunar: 1, dd: 16, mm:  1, info: "Giỗ bà nội (1992)" }
+  , { lunar: 1, dd: 13, mm:  3, info: "Giỗ cậu 2 (bên ngoại)" }
+  , { lunar: 1, dd:  6, mm:  4, info: "Giỗ bác Hồng" }
+  , { lunar: 1, dd: 23, mm:  5, info: "Giỗ ông ngoại" }
+  , { lunar: 1, dd: 27, mm:  9, info: "Giỗ mẹ" }
+  , { lunar: 1, dd: 22, mm: 11, info: "Giỗ bác Tô" }
+  , { lunar: 1, dd: 26, mm: 11, info: "Giỗ bác Chừng" }
+  ]);
   cur_date = new Date;
   cur_date.setHours(0, 0, 0, 0);
   load_curr_month(cur_date);
