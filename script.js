@@ -17,6 +17,7 @@ $(document).ready(function () {
   , { lunar: 1, dd: 26, mm: 11, info: "Giỗ bác Chừng" }
   ]);
   cur_date = new Date;
+  cur_date.setDate(1);
   cur_date.setHours(0, 0, 0, 0);
   load_curr_month(cur_date);
   show_day_info(cur_date);
