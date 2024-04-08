@@ -15,9 +15,16 @@ $(document).ready(function () {
   , { lunar: 1, dd: 27, mm:  9, info: "Giỗ mẹ" }
   , { lunar: 1, dd: 22, mm: 11, info: "Giỗ bác Tô" }
   , { lunar: 1, dd: 26, mm: 11, info: "Giỗ bác Chừng" }
+
+  , { lunar: 0, dd:  2, mm:  4, info: "Sinh nhật bác Ninh (1944)" }
+  , { lunar: 0, dd:  7, mm:  4, info: "Sinh nhật cô Vân (1961)" }
+  , { lunar: 0, dd: 28, mm:  4, info: "Sinh nhật Eni" }
+  , { lunar: 0, dd:  5, mm:  8, info: "Sinh nhật Bà Ngoại (1929)" }
+  , { lunar: 0, dd:  9, mm:  8, info: "Sinh nhật Bảy" }
+  , { lunar: 0, dd:  5, mm:  9, info: "Sinh nhật Ba" }
+  , { lunar: 0, dd:  6, mm: 12, info: "Sinh nhật Mẹ" }
   ]);
   cur_date = new Date;
-  cur_date.setDate(1);
   cur_date.setHours(0, 0, 0, 0);
   load_curr_month(cur_date);
   show_day_info(cur_date);
@@ -89,6 +96,7 @@ function load_curr_month(date) {
   $('#titleCal').html(cur_date.format('MM/yyyy'));
 }
 function load_next_month(n) {
+  cur_date.setDate(1);
   cur_date.setMonth(cur_date.getMonth() + n);
   load_curr_month(cur_date);
 }
